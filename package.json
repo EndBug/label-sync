@@ -9,7 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
-    "pre-commit": "npm run build && git add lib"
+    "hooks": {
+      "pre-commit": "npm run build && git add lib"
+    }
   },
   "repository": {
     "type": "git",
