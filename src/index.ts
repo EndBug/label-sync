@@ -11,6 +11,7 @@ let usingLocalFile: boolean
   try {
     checkInputs()
 
+    // @ts-expect-error
     const labels = usingLocalFile
       ? readConfigFile(getInput('config-file'))
       : await fetchRepoLabels(getInput('source-repo'), getInput('source-repo-token'))
@@ -28,7 +29,7 @@ let usingLocalFile: boolean
     core.info(JSON.stringify(diff, null, 2))
     core.endGroup()
   } catch (e) { setFailed(e) }
-})
+})()
 
 function isProperConfig(value: any): value is LabelInfo[] {
   return value instanceof Array
