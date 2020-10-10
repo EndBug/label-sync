@@ -1,3 +1,5 @@
+require('pretty-error').start()
+
 import core, { getInput, setFailed } from '@actions/core'
 import githubLabelSync, { LabelInfo } from 'github-label-sync'
 import fs from 'fs'

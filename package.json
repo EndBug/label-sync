@@ -28,6 +28,7 @@
     "@actions/core": "^1.2.6",
     "axios": "^0.20.0",
     "github-label-sync": "github:EndBug/github-label-sync#typings-usable",
+    "pretty-error": "^2.1.1",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
