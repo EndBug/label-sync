@@ -1,6 +1,6 @@
 require('pretty-error').start()
 
-import core, { getInput, setFailed } from '@actions/core'
+import { endGroup, getInput, info, setFailed, startGroup } from '@actions/core'
 import githubLabelSync, { LabelInfo } from 'github-label-sync'
 import fs from 'fs'
 import path from 'path'
@@ -27,9 +27,9 @@ let usingLocalFile: boolean
       dryRun: getInput('dry-run') == 'true'
     })
 
-    core.startGroup('Label diff')
-    core.info(JSON.stringify(diff, null, 2))
-    core.endGroup()
+    startGroup('Label diff')
+    info(JSON.stringify(diff, null, 2))
+    endGroup()
   } catch (e) { setFailed(e) }
 })()
 
@@ -88,18 +88,18 @@ function readConfigFile(filePath: string) {
 }
 
 async function fetchRepoLabels(repo: string, token?: string): Promise<LabelInfo[]> {
-  core.startGroup('Getting repo labels...')
+  startGroup('Getting repo labels...')
 
   const url = `https://api.github.com/repos/${repo}/labels`,
     headers = token ? { Authorization: `token ${token}` } : undefined
-  core.info(`Using following URL: ${url}`)
+  info(`Using following URL: ${url}`)
 
   const { data } = await axios.get(url, { headers })
   if (!data || !(data instanceof Array))
     throw 'Can\'t get label data from GitHub API'
 
-  core.info(`${data.length} labels fetched.`)
-  core.endGroup()
+  info(`${data.length} labels fetched.`)
+  endGroup()
 
   return data.map(element => ({
     name: element.name as string,
@@ -125,7 +125,7 @@ function checkInputs() {
   if (sourceRepo && sourceRepo.split('/').length != 2)
     setFailed('Source repo should be in the owner/repo format, like EndBug/label-sync!')
   if (sourceRepo && !getInput('source-repo-token'))
-    core.info('You\'re using a source repo without a token: if your repository is private the action won\'t be able to read the labels.')
+    info('You\'re using a source repo without a token: if your repository is private the action won\'t be able to read the labels.')
 
   if (!['true', 'false'].includes(getInput('delete-other-labels')))
     setFailed('The only values you can use for the `delete-other-labels` option are `true` and `false`')
