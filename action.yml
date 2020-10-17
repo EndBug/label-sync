@@ -29,3 +29,7 @@ inputs:
     description: Whether to only display the changes, without making them (useful if you're worried you're going to mess up)
     required: false
     default: 'false'
+
+branding:
+  icon: tag
+  color: blue
