@@ -1,0 +1,15 @@
+name: Update tags
+
+on:
+  release:
+    types: [published, edited]
+
+jobs:
+  actions-tagger:
+    runs-on: windows-latest
+    steps:
+      - uses: Actions-R-Us/actions-tagger@v2
+        with:
+          publish_latest_tag: true
+        env:
+          GITHUB_TOKEN: '${{secrets.GITHUB_TOKEN}}'
