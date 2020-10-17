@@ -19,7 +19,7 @@ jobs:
         # This is needed in order to edit the labels
         token: ${{ secrets.GITHUB_TOKEN }}
         
-        # If you want to use a config file, you can put its path here
+        # If you want to use a config file, you can put its path here (more info in the paragraphs below)
         config-file: .github/labels.yml
 
         # If you want to use a source repo, you can put is name here (only the owner/repo format is accepted)
@@ -34,4 +34,55 @@ jobs:
         dry-run: true
 ```
 
-This is only a sample workflow to illustrate all the options: if you want to see an actual workflow you can check the one in this repo [here](.github/workflows/labels.yml).
+This is only a sample workflow to illustrate all the options: if you want to see an actual workflow you can check out the one in this repo [here](.github/workflows/labels.yml).
+
+### Config files
+
+If you want to use a config file you can create your own following the instructions below.
+
+If you want to start off by copying the labels from another repository, you can use my [`EndBug/export-label-config` action](https://github.com/EndBug/export-label-config), that will generate one for you.
+
+How to create a config file:
+- Create a JSON or YAML file, with one of these extensions: `.json`, `.yaml`, `.yml`.
+- Every label should be an array element: add some square brackets `[]` if you need to.
+- Every element of the array should be an object with the following properties:
+  - `name` - The name of the label.
+  - `color` - The color of the label.
+  - `description` - [optional] The description of the label.
+  - `aliases` - [optional] An array containing the "aliases" of the label. If an existing label's name is an alias that label will be edited to match your config: this way you don't loose issues and PRs that have been labeled previously.
+
+This is how it would end up looking:
+
+```yaml
+- name: A label
+  color: '000000'
+
+- name: Another label
+  color: '111111'
+  description: A very inspiring description
+
+- name: Yet another label
+  color: '222222'
+  aliases: [ 'first', 'second', 'third' ]
+```
+
+```json
+[
+  {
+    "name": "A label",
+    "color": "000000"
+  },
+  {
+    "name": "Another label",
+    "color": "111111",
+    "description": "A very inspiring description"
+  },
+  {
+    "name": "Yet another label",
+    "color": "222222",
+    "aliases": [ "first", "second", "third" ]
+  }
+]
+```
+
+If you want to see an actual config file, you can check out the one in this repo [here](.github/labels.yml).
