@@ -8,8 +8,9 @@ runs:
 
 inputs:
   token:
-    description: The token needed to edit the labels in this repo
-    required: true
+    description: GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT), needed to edit the labels in this repo
+    required: false
+    default: ${{ github.token }}
 
   config-file:
     description: The path to the JSON or YAML file containing the label config (more info in the README)
