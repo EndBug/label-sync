@@ -28,11 +28,12 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "axios": "^0.20.0",
-    "github-label-sync": "github:EndBug/github-label-sync#typings-usable",
+    "github-label-sync": "^2.0.0",
     "pretty-error": "^2.1.1",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@types/github-label-sync": "^2.0.0",
     "@types/node": "^14.11.5",
     "@types/yamljs": "^0.2.31",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
