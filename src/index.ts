@@ -1,7 +1,7 @@
 require('pretty-error').start()
 
 import * as core from '@actions/core'
-import githubLabelSync, { LabelInfo } from 'github-label-sync'
+import githubLabelSync, { LabelInfo, Options } from 'github-label-sync'
 import fs from 'fs'
 import path from 'path'
 import yaml from 'yamljs'
@@ -30,14 +30,18 @@ let usingLocalFile!: boolean
         )
 
     startGroup('Syncing labels...')
-    const diff = await githubLabelSync({
+    const options: Options = {
       accessToken: getInput('token'),
       repo: process.env.GITHUB_REPOSITORY as string,
       labels,
 
       allowAddedLabels: getInput('delete-other-labels') != 'true',
       dryRun: getInput('dry-run') == 'true'
-    })
+    }
+    core.debug(
+      'Running with following config:\n' + JSON.stringify(options, null, 2)
+    )
+    const diff = await githubLabelSync(options)
     log.success('Sync successful')
     endGroup()
 
