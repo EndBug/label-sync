@@ -17,12 +17,11 @@ const log = {
     core[showInReport ? 'error' : 'info']('✗ ' + str),
   fatal: (str: string) => core.setFailed('✗ ' + str)
 }
-let usingLocalFile: boolean
+let usingLocalFile!: boolean
 ;(async () => {
   try {
     checkInputs()
 
-    // @ts-expect-error
     const labels = usingLocalFile
       ? readConfigFile(getInput('config-file'))
       : await fetchRepoLabels(
@@ -50,24 +49,39 @@ let usingLocalFile: boolean
   }
 })()
 
-function isProperConfig(value: any): value is LabelInfo[] {
-  return (
-    value instanceof Array &&
-    value.every(
-      (element) =>
-        typeof element == 'object' &&
-        element.name &&
-        typeof element.name == 'string' &&
-        element.description &&
-        typeof element.description == 'string' &&
-        (!element.aliases ||
-          (element.aliases instanceof Array &&
-            element.aliases.every(
-              (alias) => alias && typeof alias == 'string'
-            ))) &&
-        (!element.description || typeof element.description == 'string')
+function throwConfigError(value: LabelInfo[]) {
+  if (!(value instanceof Array)) throw 'Parsed value should be an array'
+
+  value.forEach((element, index) => {
+    if (typeof element != 'object')
+      throw `Every entry should be an object (index: ${index})`
+
+    if (typeof element.name != 'string')
+      throw `.name should be a string (received: ${typeof element.name}, index: ${index})`
+    if (!element.name)
+      throw `.name should not be an empty string (index: ${index})`
+
+    if (typeof element.color != 'string')
+      throw `.color should be a string (received: ${typeof element.color}, index: ${index})`
+    if (!element.color)
+      throw `.color should not be an empty string (index: ${index})`
+
+    if (!['string', 'undefined'].includes(typeof element.description))
+      throw `.description should be either a string or undefined (received: ${typeof element.description}, index: ${index})`
+
+    if (
+      typeof element.aliases != 'undefined' &&
+      !(element.aliases instanceof Array)
     )
-  )
+      throw `.aliases should be either an array or undefined (received: ${typeof element.aliases}, index: ${index})`
+
+    element.aliases?.forEach((alias, aliasIndex) => {
+      if (typeof alias != 'string')
+        throw `Every alias should be a string (received: ${typeof alias}, element index: ${index}, alias index: ${aliasIndex})`
+      if (!alias)
+        throw `Aliases shouldn't be empty strings (element index: ${index}, alias index: ${aliasIndex})`
+    })
+  })
 }
 
 function readConfigFile(filePath: string) {
@@ -90,12 +104,12 @@ function readConfigFile(filePath: string) {
     // Parse YAML file
     log.info('Parsing YAML file...')
     parsed = yaml.parse(file)
-    if (!isProperConfig(parsed))
-      throw `Parsed YAML file is invalid. Parsed: ${JSON.stringify(
-        parsed,
-        null,
-        2
-      )}`
+    try {
+      throwConfigError(parsed)
+    } catch (e) {
+      log.error(JSON.stringify(parsed, null, 2), false)
+      throw 'Parsed YAML file is invalid:\n' + e
+    }
   } else if (fileExtension == '.json') {
     // Try to parse JSON file
     log.info('Parsing JSON file...')
@@ -104,12 +118,13 @@ function readConfigFile(filePath: string) {
     } catch {
       throw "Couldn't parse JSON config file, check for syntax errors."
     }
-    if (!isProperConfig(parsed))
-      throw `Parsed JSON file is invalid. Parsed: ${JSON.stringify(
-        parsed,
-        null,
-        2
-      )}`
+
+    try {
+      throwConfigError(parsed)
+    } catch (e) {
+      log.error(JSON.stringify(parsed, null, 2), false)
+      throw 'Parsed JSON file is invalid:\n' + e
+    }
   } else {
     throw `Invalid file extension: ${fileExtension}`
   }
