@@ -39,7 +39,7 @@ let usingLocalFile: boolean
       allowAddedLabels: getInput('delete-other-labels') != 'true',
       dryRun: getInput('dry-run') == 'true'
     })
-    log.success('Sync successfull')
+    log.success('Sync successful')
     endGroup()
 
     startGroup('Label diff')
@@ -71,7 +71,7 @@ function isProperConfig(value: any): value is LabelInfo[] {
 }
 
 function readConfigFile(filePath: string) {
-  startGroup('Reading config file')
+  startGroup('Reading config file...')
   let file: string
 
   try {
@@ -114,6 +114,8 @@ function readConfigFile(filePath: string) {
     throw `Invalid file extension: ${fileExtension}`
   }
 
+  log.success('File parsed successfully.')
+  log.info('Parsed config:\n' + JSON.stringify(parsed, null, 2))
   endGroup()
   return parsed
 }
