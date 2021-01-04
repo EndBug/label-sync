@@ -30,6 +30,7 @@ let usingLocalFile: boolean
           getInput('source-repo-token')
         )
 
+    startGroup('Syncing labels...')
     const diff = await githubLabelSync({
       accessToken: getInput('token'),
       repo: process.env.GITHUB_REPOSITORY as string,
@@ -38,6 +39,8 @@ let usingLocalFile: boolean
       allowAddedLabels: getInput('delete-other-labels') != 'true',
       dryRun: getInput('dry-run') == 'true'
     })
+    log.success('Sync successfull')
+    endGroup()
 
     startGroup('Label diff')
     core.info(JSON.stringify(diff, null, 2))
@@ -68,10 +71,12 @@ function isProperConfig(value: any): value is LabelInfo[] {
 }
 
 function readConfigFile(filePath: string) {
+  startGroup('Reading config file')
   let file: string
 
   try {
     // Read the file from the given path
+    log.info('Reading file...')
     file = fs.readFileSync(path.resolve(filePath), { encoding: 'utf-8' })
     if (!file || typeof file != 'string') throw null
   } catch {
@@ -83,6 +88,7 @@ function readConfigFile(filePath: string) {
 
   if (['.yaml', '.yml'].includes(fileExtension)) {
     // Parse YAML file
+    log.info('Parsing YAML file...')
     parsed = yaml.parse(file)
     if (!isProperConfig(parsed))
       throw `Parsed YAML file is invalid. Parsed: ${JSON.stringify(
@@ -92,6 +98,7 @@ function readConfigFile(filePath: string) {
       )}`
   } else if (fileExtension == '.json') {
     // Try to parse JSON file
+    log.info('Parsing JSON file...')
     try {
       parsed = JSON.parse(file)
     } catch {
@@ -107,6 +114,7 @@ function readConfigFile(filePath: string) {
     throw `Invalid file extension: ${fileExtension}`
   }
 
+  endGroup()
   return parsed
 }
 
@@ -136,6 +144,10 @@ async function fetchRepoLabels(
 }
 
 function checkInputs() {
+  let cb = () => {}
+
+  startGroup('Checking inputs...')
+  log.info('Checking inputs...')
   if (!getInput('token')) throw 'The token parameter is required.'
 
   const configFile = getInput('config-file'),
@@ -150,13 +162,19 @@ function checkInputs() {
   if (sourceRepo && sourceRepo.split('/').length != 2)
     throw 'Source repo should be in the owner/repo format, like EndBug/label-sync!'
   if (sourceRepo && !getInput('source-repo-token'))
-    log.warning(
-      "You're using a source repo without a token: if your repository is private the action won't be able to read the labels.",
-      false
-    )
+    cb = () =>
+      log.warning(
+        "You're using a source repo without a token: if your repository is private the action won't be able to read the labels.",
+        false
+      )
 
   if (!['true', 'false'].includes(getInput('delete-other-labels')))
     throw 'The only values you can use for the `delete-other-labels` option are `true` and `false`'
   if (!['true', 'false'].includes(getInput('dry-run')))
     throw 'The only values you can use for the `dry-run` option are `true` and `false`'
+
+  log.success('Inputs are valid')
+  endGroup()
+
+  cb()
 }
