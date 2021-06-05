@@ -34,8 +34,8 @@ let configSource!: ConfigSource
         break
       case ConfigSource.remote:
         labels = await readRemoteConfigFile(
-          getInput('source-repo'),
-          getInput('config-file')
+          getInput('config-file'),
+          getInput('source-repo')
         )
         break
       case ConfigSource.repository:
@@ -171,7 +171,8 @@ async function readRemoteConfigFile(
 ): Promise<LabelInfo[]> {
   startGroup('Reading remote config file ...')
 
-  const url = `https://api.github.com/repos/${repo}/contents/${filePath}?ref=main`,
+  const branch = await getRemoteBranch(repo, token)
+  const url = `https://api.github.com/repos/${repo}/contents/${filePath}?ref=${branch}`,
     headers = token
       ? {
           Authorization: `token ${token}`,
@@ -182,7 +183,7 @@ async function readRemoteConfigFile(
 
   const { data } = await axios.get(url, { headers })
   if (!data || typeof data !== 'string')
-    throw "Can't get label data from GitHub API"
+    throw "Can't get remote config file from GitHub API"
 
   log.success(`${filePath} config fetched from ${repo}.`)
 
@@ -192,6 +193,29 @@ async function readRemoteConfigFile(
   log.info('Parsed config:\n' + JSON.stringify(parsed, null, 2))
   endGroup()
   return parsed
+}
+
+async function getRemoteBranch(repo: string, token?: string): Promise<string> {
+  let sourceRepoBranch = getInput('source-repo-branch')
+
+  if (!sourceRepoBranch) {
+    log.info('Determine default branch of remote repo ...')
+
+    const url = `https://api.github.com/repos/${repo}`,
+      headers = token ? { Authorization: `token ${token}` } : undefined
+    log.info(`Using following URL: ${url}`)
+
+    const { data } = await axios.get(url, { headers })
+    if (!data || !(data instanceof Object))
+      throw "Can't get remote repo data from GitHub API"
+
+    sourceRepoBranch = data.default_branch
+
+    log.success("Remote's default branch determined")
+  }
+
+  log.info(`Using remote branch: ${sourceRepoBranch}`)
+  return sourceRepoBranch
 }
 
 async function fetchRepoLabels(

@@ -18,6 +18,9 @@ inputs:
   source-repo:
     description: The repo to copy labels from (if not using a config file), in the 'owner/repo' format
     required: false
+  source-repo-branch:
+    description: When using a remote config file set the brach to use (defaults to the default branch of the remote)
+    required: false
   source-repo-token:
     description: A token to use if the source repo is private
     required: false
