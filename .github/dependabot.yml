@@ -8,6 +8,8 @@ updates:
     commit-message:
       include: scope
       prefix: ci
+      labels:
+        - 'type: chore'
 
   - package-ecosystem: npm
     directory: /
@@ -17,3 +19,5 @@ updates:
     commit-message:
       include: scope
       prefix: chore
+      labels:
+        - 'type: chore'
