@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/EndBug/label-sync#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "^1.4.0",
     "axios": "^0.20.0",
     "github-label-sync": "^2.0.0",
     "pretty-error": "^2.1.1",
