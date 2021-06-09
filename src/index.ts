@@ -35,7 +35,8 @@ let configSource!: ConfigSource
       case ConfigSource.remote:
         labels = await readRemoteConfigFile(
           getInput('config-file'),
-          getInput('source-repo')
+          getInput('source-repo'),
+          getInput('source-repo-token')
         )
         break
       case ConfigSource.repository:
