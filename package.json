@@ -24,7 +24,7 @@
   "dependencies": {
     "@actions/core": "^1.4.0",
     "axios": "^0.21.1",
-    "github-label-sync": "^2.0.0",
+    "github-label-sync": "^2.0.1",
     "pretty-error": "^3.0.3",
     "yamljs": "^0.3.0"
   },
