@@ -106,7 +106,14 @@ function readConfigFile(filePath: string) {
   try {
     // Read the file from the given path
     log.info('Reading file...')
-    file = fs.readFileSync(path.resolve(filePath), { encoding: 'utf-8' })
+
+    const resolvedPath = path.resolve(filePath)
+    core.debug(`Resolved path: ${resolvedPath}`)
+
+    file = fs.readFileSync(resolvedPath, { encoding: 'utf-8' })
+    core.debug(`fs ok: type ${typeof file}`)
+    core.debug(file)
+
     if (!file || typeof file != 'string') throw null
   } catch {
     throw "Can't access config file."
