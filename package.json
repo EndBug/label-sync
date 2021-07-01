@@ -24,7 +24,7 @@
   "dependencies": {
     "@actions/core": "^1.4.0",
     "axios": "^0.21.1",
-    "github-label-sync": "^2.0.0",
+    "github-label-sync": "^2.0.1",
     "pretty-error": "^3.0.3",
     "yamljs": "^0.3.0"
   },
@@ -32,14 +32,14 @@
     "@types/github-label-sync": "^2.0.0",
     "@types/node": "~12.20.15",
     "@types/yamljs": "^0.2.31",
-    "@typescript-eslint/eslint-plugin": "^4.26.1",
-    "@typescript-eslint/parser": "^4.26.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
     "@vercel/ncc": "^0.28.6",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
-    "prettier": "^2.3.1",
-    "typescript": "^4.3.2"
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.4"
   }
 }
