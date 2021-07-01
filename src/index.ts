@@ -167,7 +167,7 @@ function parseConfigFile(
 }
 
 async function readRemoteConfigFile(fileURL: string): Promise<LabelInfo[]> {
-  startGroup('Reading remote config file ...')
+  startGroup('Reading remote config file...')
   const token = getInput('request-token')
 
   const headers = token
