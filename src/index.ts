@@ -115,7 +115,8 @@ function readConfigFile(filePath: string) {
     core.debug(file)
 
     if (!file || typeof file != 'string') throw null
-  } catch {
+  } catch (e) {
+    core.debug(`Actual error: ${e}`)
     throw "Can't access config file."
   }
 
