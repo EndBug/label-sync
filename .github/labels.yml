@@ -35,7 +35,7 @@
 
 - name: 'type: chore'
   color: C5DEF5
-  description: 'Code changes that neither fix bugs nor add features (refactoring, dependency chnages, ...)'
+  description: 'Code changes that neither fix bugs nor add features (refactoring, dependency changes, ...)'
   aliases: ['dependencies', 'type: dependencies', 'automation', 'type: automation']
 
 - name: 'type: docs'
