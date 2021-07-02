@@ -17,17 +17,28 @@ const log = {
     core[showInReport ? 'error' : 'info']('✗ ' + str),
   fatal: (str: string) => core.setFailed('✗ ' + str)
 }
-let usingLocalFile!: boolean
+
+type ConfigSource = 'local' | 'remote' | 'repo'
+let configSource!: ConfigSource
 ;(async () => {
   try {
     checkInputs()
 
-    const labels = usingLocalFile
-      ? readConfigFile(getInput('config-file'))
-      : await fetchRepoLabels(
+    let labels: LabelInfo[]
+    switch (configSource) {
+      case 'local':
+        labels = readConfigFile(getInput('config-file'))
+        break
+      case 'remote':
+        labels = await readRemoteConfigFile(getInput('config-file'))
+        break
+      case 'repo':
+        labels = await fetchRepoLabels(
           getInput('source-repo'),
-          getInput('source-repo-token')
+          getInput('request-token')
         )
+        break
+    }
 
     startGroup('Syncing labels...')
     const options: Options = {
@@ -95,19 +106,38 @@ function readConfigFile(filePath: string) {
   try {
     // Read the file from the given path
     log.info('Reading file...')
-    file = fs.readFileSync(path.resolve(filePath), { encoding: 'utf-8' })
+
+    const resolvedPath = path.resolve(filePath)
+    core.debug(`Resolved path: ${resolvedPath}`)
+
+    file = fs.readFileSync(resolvedPath, { encoding: 'utf-8' })
+    core.debug(`fs ok: type ${typeof file}`)
+    core.debug(file)
+
     if (!file || typeof file != 'string') throw null
-  } catch {
+  } catch (e) {
+    core.debug(`Actual error: ${e}`)
     throw "Can't access config file."
   }
 
+  const parsed = parseConfigFile(path.extname(filePath).toLowerCase(), file)
+
+  log.success('File parsed successfully.')
+  log.info('Parsed config:\n' + JSON.stringify(parsed, null, 2))
+  endGroup()
+  return parsed
+}
+
+function parseConfigFile(
+  fileExtension: string,
+  unparsedConfig: string
+): LabelInfo[] {
   let parsed: LabelInfo[]
-  const fileExtension = path.extname(filePath).toLowerCase()
 
   if (['.yaml', '.yml'].includes(fileExtension)) {
     // Parse YAML file
     log.info('Parsing YAML file...')
-    parsed = yaml.parse(file)
+    parsed = yaml.parse(unparsedConfig)
     try {
       throwConfigError(parsed)
     } catch (e) {
@@ -118,7 +148,7 @@ function readConfigFile(filePath: string) {
     // Try to parse JSON file
     log.info('Parsing JSON file...')
     try {
-      parsed = JSON.parse(file)
+      parsed = JSON.parse(unparsedConfig)
     } catch {
       throw "Couldn't parse JSON config file, check for syntax errors."
     }
@@ -133,7 +163,37 @@ function readConfigFile(filePath: string) {
     throw `Invalid file extension: ${fileExtension}`
   }
 
-  log.success('File parsed successfully.')
+  return parsed
+}
+
+async function readRemoteConfigFile(fileURL: string): Promise<LabelInfo[]> {
+  startGroup('Reading remote config file...')
+  const token = getInput('request-token')
+
+  const headers = token
+    ? {
+        Authorization: `token ${token}`
+      }
+    : undefined
+  log.info(`Using following URL: ${fileURL}`)
+
+  const { data } = await axios.get(fileURL, { headers })
+  if (!data || typeof data !== 'string')
+    throw "Can't get remote config file from GitHub API"
+
+  log.success(`Remote file config fetched correctly.`)
+
+  const parsed = parseConfigFile(path.extname(fileURL).toLowerCase(), data)
+
+  log.success('Remote file parsed successfully.')
+
+  try {
+    throwConfigError(parsed)
+  } catch (e) {
+    log.error(JSON.stringify(parsed, null, 2), false)
+    throw 'Parsed JSON file is invalid:\n' + e
+  }
+
   log.info('Parsed config:\n' + JSON.stringify(parsed, null, 2))
   endGroup()
   return parsed
@@ -168,21 +228,23 @@ function checkInputs() {
   let cb = () => {}
 
   startGroup('Checking inputs...')
-  log.info('Checking inputs...')
   if (!getInput('token')) throw 'The token parameter is required.'
 
   const configFile = getInput('config-file'),
     sourceRepo = getInput('source-repo')
 
-  if (!!configFile == !!sourceRepo)
+  if (!!configFile && !!sourceRepo)
     throw "You can't use a config file and a source repo at the same time. Choose one!"
 
-  // config-file: doesn't need evaluation, will be evaluated when parsing
-  usingLocalFile = !!configFile
+  if (configFile) configSource = isURL(configFile) ? 'remote' : 'local'
+  else if (sourceRepo) configSource = 'repo'
+  else throw 'You have to either use a config file or a source repo.'
+
+  log.info(`Current config mode: ${configSource}`)
 
   if (sourceRepo && sourceRepo.split('/').length != 2)
     throw 'Source repo should be in the owner/repo format, like EndBug/label-sync!'
-  if (sourceRepo && !getInput('source-repo-token'))
+  if (sourceRepo && !getInput('request-token'))
     cb = () =>
       log.warning(
         "You're using a source repo without a token: if your repository is private the action won't be able to read the labels.",
@@ -198,4 +260,17 @@ function checkInputs() {
   endGroup()
 
   cb()
+}
+
+function isURL(str: string) {
+  const pattern = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  ) // fragment locator
+  return !!pattern.test(str)
 }
