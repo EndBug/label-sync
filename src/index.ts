@@ -59,7 +59,7 @@ let configSource!: ConfigSource
     startGroup('Label diff')
     core.info(JSON.stringify(diff, null, 2))
     endGroup()
-  } catch (e) {
+  } catch (e: any) {
     log.fatal(e)
   }
 })()
