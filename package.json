@@ -23,7 +23,7 @@
   "homepage": "https://github.com/EndBug/label-sync#readme",
   "dependencies": {
     "@actions/core": "^1.5.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "github-label-sync": "^2.0.2",
     "pretty-error": "^3.0.3",
     "yamljs": "^0.3.0"
