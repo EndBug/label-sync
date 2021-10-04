@@ -209,7 +209,7 @@ async function fetchRepoLabels(
     headers = token ? { Authorization: `token ${token}` } : undefined
   log.info(`Using following URL: ${url}`)
 
-  const { data } = await axios.get(url, { headers })
+  const { data } = (await axios.get(url, { headers })) as any
   if (!data || !(data instanceof Array))
     throw "Can't get label data from GitHub API"
 
