@@ -17,10 +17,14 @@ jobs:
     steps:
       - uses: EndBug/label-sync@v2
         with:
-          # If you want to use a config file, you can put its path or URL here (more info in the paragraphs below)
-          config-file:
+          # If you want to use a config file, you can put its path or URL here, multiple files are also allowed (more info in the paragraphs below)
+          config-file: .github/labels.yml
+          # as URL:
+          config-file: https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
+          # as multiple:
+          config-file: |
+            https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
             .github/labels.yml
-            # If URL: "https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml"
 
           # If you want to use a source repo, you can put is name here (only the owner/repo format is accepted)
           source-repo: owner/repo
@@ -103,6 +107,16 @@ You can use the "raw" link that GitHub provides for the file:
   with:
     # This is just an example, but any valid URL can be used
     config-file: 'https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml'
+```
+
+You can also specify several config files (e.g. sync a set of "global" labels as well as a set of "local" labels):
+
+```yaml
+- uses: EndBug/label-sync@v2
+  with:
+    config-file: |
+        https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
+        .github/labels.yml
 ```
 
 This is different than using the `source-repo` option, since this also allows you to use aliases, if the config file has any. If you use the `source-repo` option the action will only copy over the missing labels and update colors, wihtout updating or deleting anything else.
