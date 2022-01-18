@@ -18,19 +18,20 @@ const log = {
   fatal: (str: string) => core.setFailed('✗ ' + str)
 }
 
-type ConfigSource = 'local' | 'remote' | 'repo'
-let configSource!: ConfigSource
+let configSource!: 'list' | 'repo'
 ;(async () => {
   try {
     checkInputs()
 
     let labels: LabelInfo[]
     switch (configSource) {
-      case 'local':
-        labels = readConfigFile(getInput('config-file'))
-        break
-      case 'remote':
-        labels = await readRemoteConfigFile(getInput('config-file'))
+      case 'list':
+        labels = []
+        for (const cf of getInput('config-file').split('\n')) {
+          console.log(cf)
+          if (isURL(cf)) labels.push(...(await readRemoteConfigFile(cf)))
+          else labels.push(...readConfigFile(cf))
+        }
         break
       case 'repo':
         labels = await fetchRepoLabels(
@@ -236,11 +237,19 @@ function checkInputs() {
   if (!!configFile && !!sourceRepo)
     throw "You can't use a config file and a source repo at the same time. Choose one!"
 
-  if (configFile) configSource = isURL(configFile) ? 'remote' : 'local'
-  else if (sourceRepo) configSource = 'repo'
-  else throw 'You have to either use a config file or a source repo.'
+  const sources: ('remote' | 'local')[] = []
+  if (sourceRepo) configSource = 'repo'
+  else if (configFile) {
+    configSource = 'list'
+    for (const cf of configFile.split('\n')) {
+      if (isURL(cf)) sources.push('remote')
+      else sources.push('local')
+    }
+  } else throw 'You have to either use a config file or a source repo.'
 
-  log.info(`Current config mode: ${configSource}`)
+  log.info(
+    `Current config mode: ${sources ? sources.join(', ') : configSource}`
+  )
 
   if (sourceRepo && sourceRepo.split('/').length != 2)
     throw 'Source repo should be in the owner/repo format, like EndBug/label-sync!'
