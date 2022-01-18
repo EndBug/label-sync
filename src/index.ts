@@ -58,7 +58,25 @@ let configSource!: 'list' | 'repo'
     endGroup()
 
     startGroup('Label diff')
-    core.info(JSON.stringify(diff, null, 2))
+    const msg: string[] = []
+    for (const label of diff) {
+      if (msg) msg.push('')
+      msg.push(`${label.name} [${label.type}]`)
+
+      const act = label.actual,
+        exp = label.expected
+      if (act?.name.normalize() !== exp?.name.normalize())
+        msg.push(`${act?.name || '☀️ '} → ${exp?.name || '⚰️ '}`)
+      if (act?.color.normalize() !== exp?.color.normalize())
+        msg.push(
+          `${act?.color ? '#' + act?.color : '☀️ '} → ${
+            exp?.color ? '#' + exp?.color : '⚰️ '
+          }`
+        )
+      if (act?.description?.normalize() !== exp?.description?.normalize())
+        msg.push(`${act?.description || '☀️ '} → ${exp?.description || '⚰️ '}`)
+    }
+    core.info(msg.join('\n'))
     endGroup()
   } catch (e: any) {
     log.fatal(e)
