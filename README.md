@@ -1,7 +1,5 @@
 # label-sync
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![All Contributors](https://img.shields.io/github/all-contributors/EndBug/label-sync)](#contributors-)
 
 An action that allows you to sync labels from a repository or a config file.
 
