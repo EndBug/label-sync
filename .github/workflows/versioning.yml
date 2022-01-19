@@ -6,10 +6,8 @@ on:
 
 jobs:
   actions-tagger:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - uses: Actions-R-Us/actions-tagger@v2
         with:
           publish_latest_tag: true
-        env:
-          GITHUB_TOKEN: '${{secrets.GITHUB_TOKEN}}'
