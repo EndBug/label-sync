@@ -1,4 +1,5 @@
 # label-sync
+[![All Contributors](https://img.shields.io/github/all-contributors/EndBug/label-sync)](#contributors-)
 
 An action that allows you to sync labels from a repository or a config file.
 
@@ -134,3 +135,23 @@ If the URL you're using needs an `Authorization` header (like if, for example, y
 The `request-token` input can also be used with a `source-repo`, if that repo is private.
 
 If your URL needs a more elaborate request, it's better if you perform it separately and save its output to a local file. You can then run the action using the local config file you just created.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/EndBug"><img src="https://avatars.githubusercontent.com/u/26386270?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Federico Grandi</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=EndBug" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
