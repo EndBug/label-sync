@@ -13,7 +13,7 @@ inputs:
     default: ${{ github.token }}
 
   config-file:
-    description: The path (or URL) to the JSON or YAML file containing the label config (more info in the README)
+    description: The path(s) (and/or URL(s)) to the JSON or YAML file containing the label config (more info in the README)
     required: false
   source-repo:
     description: The repo to copy labels from (if not using a config file), in the 'owner/repo' format
