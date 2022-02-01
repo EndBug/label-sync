@@ -151,6 +151,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/h1dden-da3m0n"><img src="https://avatars.githubusercontent.com/u/33120068?v=4?s=100" width="100px;" alt=""/><br /><sub><b>K3rnelPan1c</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=h1dden-da3m0n" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/danielwerg"><img src="https://avatars.githubusercontent.com/u/35052399?v=4?s=100" width="100px;" alt=""/><br /><sub><b>danielwerg</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=danielwerg" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/kenodegard"><img src="https://avatars.githubusercontent.com/u/4546435?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ken Odegard</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=kenodegard" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/armsnyder"><img src="https://avatars.githubusercontent.com/u/9969202?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Snyder</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=armsnyder" title="Code">💻</a></td>
   </tr>
 </table>
 
