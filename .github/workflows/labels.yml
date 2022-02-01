@@ -1,8 +1,5 @@
 name: Sync labels
 on:
-  push:
-    paths:
-      - '.github/labels.yml'
   workflow_dispatch:
 
 jobs:
@@ -13,4 +10,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: EndBug/label-sync@v2
         with:
-          config-file: '.github/labels.yml'
+          config-file: 'https://raw.githubusercontent.com/EndBug/labels/main/labels.yml'
