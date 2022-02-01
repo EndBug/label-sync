@@ -95,6 +95,8 @@ This is how it would end up looking:
 ]
 ```
 
+Note that `color` may be specified in either `000000` or `'#000000'` format. Mind the quotes when using yaml.
+
 If you want to see an actual config file, you can check out the one in this repo [here](.github/labels.yml).
 
 This action can either read a local file or fetch it from a custom URL.  

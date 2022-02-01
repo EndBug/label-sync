@@ -41,6 +41,12 @@ let configSource!: 'list' | 'repo'
         break
     }
 
+    // Support prefixing colors with '#'.
+    labels = labels.map((label) => ({
+      ...label,
+      color: label.color.replace(/^#/, '')
+    }))
+
     startGroup('Syncing labels...')
     const options: Options = {
       accessToken: getInput('token'),
