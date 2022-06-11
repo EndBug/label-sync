@@ -49,6 +49,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "srealmoreno",
+      "name": "Salvador real",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50985135?v=4",
+      "profile": "http://srealmoreno.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
