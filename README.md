@@ -26,7 +26,7 @@ jobs:
           config-file: |
             https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
             .github/labels.yml
-
+          
           # If you want to use a source repo, you can put is name here (only the owner/repo format is accepted)
           source-repo: owner/repo
 
@@ -36,7 +36,7 @@ jobs:
           # If you want to delete any additional label, set this to true
           delete-other-labels: false
 
-          #If you want the action just to show you the preview of the changes, without actually editing the labels, set this to tru
+          # If you want the action just to show you the preview of the changes, without actually editing the labels, set this to true
           dry-run: true
 
           # You can change the token used to change the labels, this is the default one
@@ -122,7 +122,7 @@ You can also specify several config files (e.g. sync a set of "global" labels as
         .github/labels.yml
 ```
 
-This is different than using the `source-repo` option, since this also allows you to use aliases, if the config file has any. If you use the `source-repo` option the action will only copy over the missing labels and update colors, wihtout updating or deleting anything else.
+This is different than using the `source-repo` option, since this also allows you to use aliases, if the config file has any. If you use the `source-repo` option the action will only copy over the missing labels and update colors, without updating or deleting anything else.
 
 If the URL you're using needs an `Authorization` header (like if, for example, you're fetching it from a private repo), you can put its value in the `request-token` input:
 
@@ -140,7 +140,7 @@ If your URL needs a more elaborate request, it's better if you perform it separa
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
