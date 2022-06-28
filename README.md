@@ -26,7 +26,7 @@ jobs:
           config-file: |
             https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
             .github/labels.yml
-          
+
           # If you want to use a source repo, you can put is name here (only the owner/repo format is accepted)
           source-repo: owner/repo
 
