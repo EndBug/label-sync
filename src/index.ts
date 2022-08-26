@@ -47,7 +47,7 @@ let configSource!: 'list' | 'repo'
       color: label.color.replace(/^#/, '')
     }))
 
-    startGroup('Syncing labels...')
+    startGroup(`Syncing labels... ${process.env.GITHUB_API_URL}`)
     const options: Options = {
       accessToken: getInput('token'),
       endpoint: process.env.GITHUB_API_URL,
