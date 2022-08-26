@@ -50,9 +50,9 @@ let configSource!: 'list' | 'repo'
     startGroup('Syncing labels...')
     const options: Options = {
       accessToken: getInput('token'),
+      endpoint: process.env.GITHUB_API_URL,
       repo: process.env.GITHUB_REPOSITORY as string,
       labels,
-
       allowAddedLabels: getInput('delete-other-labels') != 'true',
       dryRun: getInput('dry-run') == 'true'
     }
@@ -230,7 +230,7 @@ async function fetchRepoLabels(
 ): Promise<LabelInfo[]> {
   startGroup('Getting repo labels...')
 
-  const url = `https://api.github.com/repos/${repo}/labels`,
+  const url = `${process.env.GITHUB_API_URL}/repos/${repo}/labels`,
     headers = token ? { Authorization: `token ${token}` } : undefined
   log.info(`Using following URL: ${url}`)
 
