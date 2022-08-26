@@ -85,7 +85,7 @@ let configSource!: 'list' | 'repo'
     core.info(msg.join('\n'))
     endGroup()
   } catch (e: any) {
-    log.fatal(e)
+    log.fatal(JSON.stringify(e))
   }
 })()
 
