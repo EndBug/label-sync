@@ -47,10 +47,10 @@ let configSource!: 'list' | 'repo'
       color: label.color.replace(/^#/, '')
     }))
 
-    startGroup(`Syncing labels... ${process.env.GITHUB_API_URL}`)
+    startGroup(`Syncing labels...`)
     const options: Options = {
       accessToken: getInput('token'),
-      endpoint: process.env.GITHUB_API_URL,
+      endpoint: process.env.GITHUB_API_URL?.replace(/^https?:\/\//, ''),
       repo: process.env.GITHUB_REPOSITORY as string,
       labels,
       allowAddedLabels: getInput('delete-other-labels') != 'true',
