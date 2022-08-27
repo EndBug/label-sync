@@ -153,6 +153,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
     <td align="center"><a href="https://github.com/kenodegard"><img src="https://avatars.githubusercontent.com/u/4546435?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ken Odegard</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=kenodegard" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/armsnyder"><img src="https://avatars.githubusercontent.com/u/9969202?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Snyder</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=armsnyder" title="Code">💻</a></td>
     <td align="center"><a href="http://srealmoreno.com"><img src="https://avatars.githubusercontent.com/u/50985135?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Salvador real</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=srealmoreno" title="Code">💻</a></td>
+    <td align="center"><a href="http://simbo.de/"><img src="https://avatars.githubusercontent.com/u/647390?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Simon Lepel</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=simbo" title="Code">💻</a></td>
   </tr>
 </table>
 
