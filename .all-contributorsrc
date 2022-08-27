@@ -58,6 +58,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "simbo",
+      "name": "Simon Lepel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/647390?v=4",
+      "profile": "http://simbo.de/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
