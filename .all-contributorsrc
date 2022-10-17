@@ -67,6 +67,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "carrodher",
+      "name": "Carlos Rodríguez Hernández",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13216600?v=4",
+      "profile": "https://www.linkedin.com/in/carlosrodriguezhernandez/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -74,5 +83,6 @@
   "projectOwner": "EndBug",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
