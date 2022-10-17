@@ -146,15 +146,20 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/EndBug"><img src="https://avatars.githubusercontent.com/u/26386270?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Federico Grandi</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=EndBug" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/h1dden-da3m0n"><img src="https://avatars.githubusercontent.com/u/33120068?v=4?s=100" width="100px;" alt=""/><br /><sub><b>K3rnelPan1c</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=h1dden-da3m0n" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/danielwerg"><img src="https://avatars.githubusercontent.com/u/35052399?v=4?s=100" width="100px;" alt=""/><br /><sub><b>danielwerg</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=danielwerg" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/kenodegard"><img src="https://avatars.githubusercontent.com/u/4546435?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ken Odegard</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=kenodegard" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/armsnyder"><img src="https://avatars.githubusercontent.com/u/9969202?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Snyder</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=armsnyder" title="Code">💻</a></td>
-    <td align="center"><a href="http://srealmoreno.com"><img src="https://avatars.githubusercontent.com/u/50985135?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Salvador real</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=srealmoreno" title="Code">💻</a></td>
-    <td align="center"><a href="http://simbo.de/"><img src="https://avatars.githubusercontent.com/u/647390?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Simon Lepel</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=simbo" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/EndBug"><img src="https://avatars.githubusercontent.com/u/26386270?v=4?s=100" width="100px;" alt="Federico Grandi"/><br /><sub><b>Federico Grandi</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=EndBug" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/h1dden-da3m0n"><img src="https://avatars.githubusercontent.com/u/33120068?v=4?s=100" width="100px;" alt="K3rnelPan1c"/><br /><sub><b>K3rnelPan1c</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=h1dden-da3m0n" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/danielwerg"><img src="https://avatars.githubusercontent.com/u/35052399?v=4?s=100" width="100px;" alt="danielwerg"/><br /><sub><b>danielwerg</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=danielwerg" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://github.com/kenodegard"><img src="https://avatars.githubusercontent.com/u/4546435?v=4?s=100" width="100px;" alt="Ken Odegard"/><br /><sub><b>Ken Odegard</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=kenodegard" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/armsnyder"><img src="https://avatars.githubusercontent.com/u/9969202?v=4?s=100" width="100px;" alt="Adam Snyder"/><br /><sub><b>Adam Snyder</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=armsnyder" title="Code">💻</a></td>
+      <td align="center"><a href="http://srealmoreno.com"><img src="https://avatars.githubusercontent.com/u/50985135?v=4?s=100" width="100px;" alt="Salvador real"/><br /><sub><b>Salvador real</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=srealmoreno" title="Code">💻</a></td>
+      <td align="center"><a href="http://simbo.de/"><img src="https://avatars.githubusercontent.com/u/647390?v=4?s=100" width="100px;" alt="Simon Lepel"/><br /><sub><b>Simon Lepel</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=simbo" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://www.linkedin.com/in/carlosrodriguezhernandez/"><img src="https://avatars.githubusercontent.com/u/13216600?v=4?s=100" width="100px;" alt="Carlos Rodríguez Hernández"/><br /><sub><b>Carlos Rodríguez Hernández</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=carrodher" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
