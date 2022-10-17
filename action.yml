@@ -1,6 +1,6 @@
 name: Label Sync
 description: An action that allows you to sync labels from a repository or a config file
-author: Federico Grandi <fgrandi30@gmail.com>
+author: Federico Grandi <federicograndi@duck.com>
 
 runs:
   using: node16
