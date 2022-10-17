@@ -1,6 +1,6 @@
 {
   "name": "label-sync",
-  "version": "3.0.0",
+  "version": "2.3.0",
   "description": "An action that allows you to sync labels from a repository or a config file",
   "main": "lib/index.js",
   "scripts": {
