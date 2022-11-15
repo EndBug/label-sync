@@ -158,6 +158,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
     </tr>
     <tr>
       <td align="center"><a href="https://www.linkedin.com/in/carlosrodriguezhernandez/"><img src="https://avatars.githubusercontent.com/u/13216600?v=4?s=100" width="100px;" alt="Carlos Rodríguez Hernández"/><br /><sub><b>Carlos Rodríguez Hernández</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=carrodher" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/MaddoScientisto"><img src="https://avatars.githubusercontent.com/u/816014?v=4?s=100" width="100px;" alt="Marco"/><br /><sub><b>Marco</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/issues?q=author%3AMaddoScientisto" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
