@@ -34,10 +34,12 @@ let configSource!: 'list' | 'repo'
         }
         break
       case 'repo':
-        labels = await fetchRepoLabels(
+        startGroup('Fetching repo labels...')
+        labels = await fetchAllRepoLabels(
           getInput('source-repo'),
           getInput('request-token')
         )
+        endGroup()
         break
     }
 
@@ -224,17 +226,39 @@ async function readRemoteConfigFile(fileURL: string): Promise<LabelInfo[]> {
   return parsed
 }
 
+async function fetchAllRepoLabels(repo: string, token?: string) {
+  const labels: LabelInfo[] = []
+
+  let page = 1
+  log.info('Fetching page 1...')
+  let curr = await fetchRepoLabels(repo, token, page)
+  log.info(`${curr.length} labels found.`)
+
+  while (curr.length) {
+    labels.push(...curr)
+    page++
+
+    log.info(`Fetching page ${page}...`)
+    curr = await fetchRepoLabels(repo, token, page)
+    log.info(`${curr.length} labels found.`)
+  }
+
+  return labels
+}
+
 async function fetchRepoLabels(
   repo: string,
-  token?: string
+  token?: string,
+  page = 1
 ): Promise<LabelInfo[]> {
   startGroup('Getting repo labels...')
 
   const url = `${process.env.GITHUB_API_URL}/repos/${repo}/labels`,
-    headers = token ? { Authorization: `token ${token}` } : undefined
+    headers = token ? { Authorization: `token ${token}` } : undefined,
+    params = { page }
   log.info(`Using following URL: ${url}`)
 
-  const { data } = (await axios.get(url, { headers })) as any
+  const { data } = (await axios.get(url, { headers, params })) as any
   if (!data || !(data instanceof Array))
     throw "Can't get label data from GitHub API"
 
