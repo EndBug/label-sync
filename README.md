@@ -21,10 +21,10 @@ jobs:
           # If you want to use a config file, you can put its path or URL here, multiple files are also allowed (more info in the paragraphs below)
           config-file: .github/labels.yml
           # as URL:
-          config-file: https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
+          config-file: https://raw.githubusercontent.com/EndBug/labels/main/labels.yml
           # as multiple:
           config-file: |
-            https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
+            https://raw.githubusercontent.com/EndBug/labels/main/labels.yml
             .github/labels.yml
 
           # If you want to use a source repo, you can put is name here (only the owner/repo format is accepted)
@@ -97,7 +97,7 @@ This is how it would end up looking:
 
 Note that `color` may be specified in either `000000` or `'#000000'` format. Mind the quotes when using yaml.
 
-If you want to see an actual config file, you can check out the one in this repo [here](.github/labels.yml).
+If you want to see an actual config file, you can check out the one in this repo [here](https://github.com/EndBug/labels/blob/main/labels.yml).
 
 This action can either read a local file or fetch it from a custom URL.  
 If you want to use a URL make sure that the data field of the response contains JSON or YAML text that follows the structure above.
@@ -109,7 +109,7 @@ You can use the "raw" link that GitHub provides for the file:
 - uses: EndBug/label-sync@v2
   with:
     # This is just an example, but any valid URL can be used
-    config-file: 'https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml'
+    config-file: 'https://raw.githubusercontent.com/EndBug/labels/main/labels.yml'
 ```
 
 You can also specify several config files (e.g. sync a set of "global" labels as well as a set of "local" labels):
@@ -118,7 +118,7 @@ You can also specify several config files (e.g. sync a set of "global" labels as
 - uses: EndBug/label-sync@v2
   with:
     config-file: |
-        https://raw.githubusercontent.com/EndBug/label-sync/main/.github/labels.yml
+        https://raw.githubusercontent.com/EndBug/labels/main/labels.yml
         .github/labels.yml
 ```
 
