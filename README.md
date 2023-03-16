@@ -11,6 +11,9 @@ on:
   # You can run this with every type of event, but it's better to run it only when you actually need it.
   workflow_dispatch:
 
+permissions:
+  issues: write
+
 jobs:
   labels:
     runs-on: ubuntu-latest
