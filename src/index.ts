@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('pretty-error').start()
 
 import * as core from '@actions/core'
@@ -86,7 +87,7 @@ let configSource!: 'list' | 'repo'
     }
     core.info(msg.join('\n'))
     endGroup()
-  } catch (e: any) {
+  } catch (e) {
     log.fatal(JSON.stringify(e))
   }
 })()
@@ -258,7 +259,7 @@ async function fetchRepoLabels(
     params = { page }
   log.info(`Using following URL: ${url}`)
 
-  const { data } = (await axios.get(url, { headers, params })) as any
+  const { data } = await axios.get(url, { headers, params })
   if (!data || !(data instanceof Array))
     throw "Can't get label data from GitHub API"
 
