@@ -19,6 +19,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out config-file from repo
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # @4.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # If this is a private repository
+          sparse-checkout: |
+            .github/labels.yml
+
       - uses: EndBug/label-sync@v2
         with:
           # If you want to use a config file, you can put its path or URL here, multiple files are also allowed (more info in the paragraphs below)
