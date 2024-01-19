@@ -61,7 +61,7 @@ How to create a config file:
 - Every element of the array should be an object with the following properties:
   - `name` - The name of the label.
   - `color` - The color of the label, with or without a leading `#`.
-  - `description` - [optional] The description of the label. ([Limited to 100-characters](https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#create-a-label) by GitHub)
+  - `description` - [optional] The description of the label ([max 100 characters](https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#create-a-label)).
   - `aliases` - [optional] An array containing the "aliases" of the label. If an existing label's name is an alias that label will be edited to match your config: this way you don't loose issues and PRs that have been labeled previously.
 
 This is how it would end up looking:
