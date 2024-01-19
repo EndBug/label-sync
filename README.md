@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/labels.yml
+
       - uses: EndBug/label-sync@v2
         with:
           # If you want to use a config file, you can put its path or URL here, multiple files are also allowed (more info in the paragraphs below)
