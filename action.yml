@@ -3,7 +3,7 @@ description: An action that allows you to sync labels from a repository or a con
 author: Federico Grandi <federicograndi@duck.com>
 
 runs:
-  using: node16
+  using: node20
   main: lib/index.js
 
 inputs:
