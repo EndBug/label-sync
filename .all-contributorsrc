@@ -94,6 +94,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "reece",
+      "name": "Reece Hart",
+      "avatar_url": "https://avatars.githubusercontent.com/u/109453?v=4",
+      "profile": "https://linkedin.com/in/reece",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
