@@ -40,6 +40,6 @@
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.0.11",
     "prettier": "^3.3.3",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.4"
   }
 }
