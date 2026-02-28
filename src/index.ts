@@ -1,5 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('pretty-error').start();
+import * as PrettyError from 'pretty-error';
+PrettyError.start();
 
 import * as core from '@actions/core';
 import githubLabelSync, {LabelInfo, Options} from 'github-label-sync';
