@@ -169,6 +169,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/andrewvaughan"><img src="https://avatars.githubusercontent.com/u/1119590?v=4?s=100" width="100px;" alt="Andrew Vaughan"/><br /><sub><b>Andrew Vaughan</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/commits?author=andrewvaughan" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://linkedin.com/in/reece"><img src="https://avatars.githubusercontent.com/u/109453?v=4?s=100" width="100px;" alt="Reece Hart"/><br /><sub><b>Reece Hart</b></sub></a><br /><a href="#maintenance-reece" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://th3s4mur41.me"><img src="https://avatars.githubusercontent.com/u/5543595?v=4?s=100" width="100px;" alt="Michaël Vanderheyden"/><br /><sub><b>Michaël Vanderheyden</b></sub></a><br /><a href="https://github.com/EndBug/label-sync/issues?q=author%3ATh3S4mur41" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://quintalwebsolutions.com"><img src="https://avatars.githubusercontent.com/u/66360459?v=4?s=100" width="100px;" alt="William Ford"/><br /><sub><b>William Ford</b></sub></a><br /><a href="#maintenance-quintal-william" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>
 </table>
