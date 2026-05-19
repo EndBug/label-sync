@@ -24,13 +24,12 @@
   "homepage": "https://github.com/EndBug/label-sync#readme",
   "dependencies": {
     "@actions/core": "^1.10.1",
+    "@endbug/github-label-sync": "^3.0.0",
     "axios": "^1.15.2",
-    "github-label-sync": "^2.3.1",
     "js-yaml": "^4.1.1",
     "pretty-error": "^4.0.0"
   },
   "devDependencies": {
-    "@types/github-label-sync": "^2.3.3",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",

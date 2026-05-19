@@ -2,7 +2,7 @@ import * as PrettyError from 'pretty-error';
 PrettyError.start();
 
 import * as core from '@actions/core';
-import githubLabelSync, {LabelInfo, Options} from 'github-label-sync';
+import githubLabelSync, {LabelInfo, Options} from '@endbug/github-label-sync';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
