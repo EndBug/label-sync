@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "The name of the label"
+      },
+      "color": {
+        "type": "string",
+        "pattern": "^#?[0-9a-fA-F]{6}$",
+        "description": "A six-character hex color code, with or without a leading '#' character"
+      },
+      "aliases": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "An array of alias names for the label"
+      },
+      "description": {
+        "type": "string",
+        "description": "A description of the label"
+      }
+    },
+    "required": [
+      "name",
+      "color"
+    ],
+    "additionalProperties": false
+  }
+}
