@@ -2,11 +2,25 @@ import * as PrettyError from 'pretty-error';
 PrettyError.start();
 
 import * as core from '@actions/core';
-import githubLabelSync, {LabelInfo, Options} from '@endbug/github-label-sync';
+import type {ConfiguredLabel} from '@endbug/github-label-sync';
+
+// 4.0.0's CommonJS build is `module.exports = githubLabelSync`. Its types
+// describe an ESM default export, so a default import compiles to `.default`
+// and ncc then calls a value that is not a function.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+import githubLabelSyncModule = require('@endbug/github-label-sync');
+const githubLabelSync =
+  githubLabelSyncModule as unknown as typeof githubLabelSyncModule.default;
 import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 import axios from 'axios';
+
+// The action still requires a color. 4.0.0 treats an omitted color as
+// "leave it unchanged".
+interface ActionLabel extends ConfiguredLabel {
+  color: string;
+}
 
 const {endGroup, getInput, startGroup} = core;
 const log = {
@@ -24,7 +38,7 @@ let configSource!: 'list' | 'repo';
   try {
     checkInputs();
 
-    let labels: LabelInfo[];
+    let labels: ActionLabel[];
     switch (configSource) {
       case 'list':
         labels = [];
@@ -51,9 +65,11 @@ let configSource!: 'list' | 'repo';
     }));
 
     startGroup('Syncing labels...');
-    const options: Options = {
+    // Pass the API URL through unchanged. 4.0.0 accepts a host or an absolute
+    // URL and keeps http://. Stripping the scheme would force https.
+    const options = {
       accessToken: getInput('token'),
-      endpoint: process.env.GITHUB_API_URL?.replace(/^https?:\/\//, ''),
+      endpoint: process.env.GITHUB_API_URL,
       repo: process.env.GITHUB_REPOSITORY as string,
       labels,
       allowAddedLabels: getInput('delete-other-labels') !== 'true',
@@ -88,11 +104,33 @@ let configSource!: 'list' | 'repo';
     core.info(msg.join('\n'));
     endGroup();
   } catch (e) {
-    log.fatal(JSON.stringify(e));
+    log.fatal(formatFailure(e));
   }
 })();
 
-function throwConfigError(value: LabelInfo[]) {
+function formatFailure(error: unknown): string {
+  // 4.0.0 rejects with Error. Error.message is not enumerable, so
+  // JSON.stringify(error) is "{}" and hides validation and API failures.
+  if (error instanceof Error) {
+    const details: Record<string, unknown> = {message: error.message};
+    for (const key of Object.keys(error)) {
+      details[key] = (error as unknown as Record<string, unknown>)[key];
+    }
+    try {
+      return JSON.stringify(details);
+    } catch {
+      return JSON.stringify(error.message);
+    }
+  }
+
+  try {
+    return JSON.stringify(error);
+  } catch {
+    return JSON.stringify(String(error));
+  }
+}
+
+function throwConfigError(value: ActionLabel[]) {
   if (!(value instanceof Array)) throw 'Parsed value should be an array';
 
   value.forEach((element, index) => {
@@ -159,13 +197,13 @@ function readConfigFile(filePath: string) {
 function parseConfigFile(
   fileExtension: string,
   unparsedConfig: string
-): LabelInfo[] {
-  let parsed: LabelInfo[];
+): ActionLabel[] {
+  let parsed: ActionLabel[];
 
   if (['.yaml', '.yml'].includes(fileExtension)) {
     // Parse YAML file
     log.info('Parsing YAML file...');
-    parsed = yaml.load(unparsedConfig) as LabelInfo[];
+    parsed = yaml.load(unparsedConfig) as ActionLabel[];
     try {
       throwConfigError(parsed);
     } catch (e) {
@@ -194,7 +232,7 @@ function parseConfigFile(
   return parsed;
 }
 
-async function readRemoteConfigFile(fileURL: string): Promise<LabelInfo[]> {
+async function readRemoteConfigFile(fileURL: string): Promise<ActionLabel[]> {
   startGroup('Reading remote config file...');
   const token = getInput('request-token');
 
@@ -228,7 +266,7 @@ async function readRemoteConfigFile(fileURL: string): Promise<LabelInfo[]> {
 }
 
 async function fetchAllRepoLabels(repo: string, token?: string) {
-  const labels: LabelInfo[] = [];
+  const labels: ActionLabel[] = [];
 
   let page = 1;
   log.info('Fetching page 1...');
@@ -251,7 +289,7 @@ async function fetchRepoLabels(
   repo: string,
   token?: string,
   page = 1
-): Promise<LabelInfo[]> {
+): Promise<ActionLabel[]> {
   startGroup('Getting repo labels...');
 
   const url = `${process.env.GITHUB_API_URL}/repos/${repo}/labels`,
