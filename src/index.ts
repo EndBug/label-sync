@@ -15,6 +15,17 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 import axios from 'axios';
+import {EnvHttpProxyAgent, setGlobalDispatcher} from 'undici';
+
+// Node's fetch reads https_proxy only when NODE_USE_ENV_PROXY is set before
+// startup. 3.0.0's client honored the variable on its own. Install the proxy
+// dispatcher when a proxy is configured so label requests still go through it.
+const proxyUrl =
+  process.env.https_proxy ||
+  process.env.HTTPS_PROXY ||
+  process.env.http_proxy ||
+  process.env.HTTP_PROXY;
+if (proxyUrl) setGlobalDispatcher(new EnvHttpProxyAgent());
 
 // The action still requires a color. 4.0.0 treats an omitted color as
 // "leave it unchanged".
@@ -144,7 +155,9 @@ function throwConfigError(value: ActionLabel[]) {
 
     if (typeof element.color !== 'string')
       throw `.color should be a string (received: ${typeof element.color}, index: ${index})`;
-    if (!element.color)
+    // '#' is nonempty. Stripping the leading '#' leaves ''. 4.0.0 then keeps
+    // the color already on the repo instead of rejecting the config.
+    if (!element.color.replace(/^#+/, ''))
       throw `.color should not be an empty string (index: ${index})`;
 
     if (!['string', 'undefined'].includes(typeof element.description))

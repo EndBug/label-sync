@@ -27,7 +27,8 @@
     "@endbug/github-label-sync": "^4.0.0",
     "axios": "^1.20.0",
     "js-yaml": "^4.3.2",
-    "pretty-error": "^4.0.0"
+    "pretty-error": "^4.0.0",
+    "undici": "^6.29.1"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
